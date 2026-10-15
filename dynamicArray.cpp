@@ -18,7 +18,8 @@ intArray::~intArray() {
     array = nullptr;
 }
 
-intArray::intArray(const intArray& copied /*копируемый объект*/) { // конструктор копирования
+// конструктор копирования
+intArray::intArray(const intArray& copied /*копируемый объект через ссылку, чтобы не было рекурсии*/) {
     this->size = copied.size;
     if (copied.size == 0 || copied.array == nullptr) {
         this->array = nullptr;
@@ -45,7 +46,7 @@ void intArray::set(int index, int value) {
         return;
     }
     if (value < -100 || value > 100) {
-        std::cout << "value exceeds the limits (-100 <= value <= 100)"
+        std::cout << "value exceeds the limits (-100 <= value <= 100)" << std::endl;
         return;
     }
     array[index] = value;
@@ -60,6 +61,36 @@ int intArray::get(int index) {
     return array[index];
 }
 
-void append(int value) { // добавление
-    return;
+void intArray::append(int value) { // добавление в конец
+    if (value < -100 || value > 100) {
+        std::cout << "value exceeds the limits (-100 <= value <= 100)" << std::endl;
+        return;
+    }
+    
+    int newSize = size + 1;
+    int* newArray = new int[newSize];
+
+    for (int i = 0; i < size; ++i) newArray[i] = array[i];
+    newArray[size] = value;
+
+    delete[] array;
+    size = newSize;
+    array = newArray;
 }
+
+void intArray::add(const intArray& added) {
+    if (added.size < size) {
+        for (int i = 0; i < added.size; ++i) array[i] += added.array[i];
+        return;
+    }
+    for (int i = 0; i < size; ++i) array[i] += added.array[i];
+}
+
+void intArray::sub(const intArray& subtracted) {
+        if (added.size < size) {
+        for (int i = 0; i < added.size; ++i) array[i] -= added.array[i];
+        return;
+    }
+    for (int i = 0; i < size; ++i) array[i] -= added.array[i];
+}
+

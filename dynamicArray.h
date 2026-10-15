@@ -16,5 +16,6 @@ class intArray {
 
         void append(int value); // задание 3: добавление в конец
 
-        
+        void add(const intArray& added); // задание 4: сложение и вычитание массивов
+        void sub(const intArray& subtracted);
 };
