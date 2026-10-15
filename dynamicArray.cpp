@@ -18,6 +18,16 @@ intArray::~intArray() {
     array = nullptr;
 }
 
+intArray::intArray(const intArray& copied /*копируемый объект*/) { // конструктор копирования
+    this->size = copied.size;
+    if (copied.size == 0 || copied.array == nullptr) {
+        this->array = nullptr;
+        return;
+    }
+    this->array = new int[copied.size];
+    for (int i = 0; i < copied.size; ++i) this->array[i] = copied.array[i];   
+}
+
 void intArray::print() const {
     if (size == 0) {
         std::cout << "array is empty" << std::endl;
@@ -48,4 +58,8 @@ int intArray::get(int index) {
     }
 
     return array[index];
+}
+
+void append(int value) { // добавление
+    return;
 }
