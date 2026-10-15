@@ -1,13 +1,16 @@
 #pragma once
 
-class intDynamicArray {
+class intArray {
     private:
         int* array;
         int size;
     public:
-        intDynamicArray(int size);
-        ~intDynamicArray();
+        intArray(int size);
+        intArray(const intArray& new); // конструктор копирования
+
+        ~intArray();
+
         void print() const;
+        void set(int index, int value);
         int get(int index) const;
-        int set(int index, int value);
-}
+};
