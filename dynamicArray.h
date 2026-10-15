@@ -8,7 +8,7 @@ class intArray {
         intArray(int size);
         ~intArray();
 
-        intArray(const intArray& new); // задание 2: конструктор копирования
+        intArray(const intArray& copied); // задание 2: конструктор копирования
 
         void print() const;
         void set(int index, int value);

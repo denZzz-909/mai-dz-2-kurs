@@ -36,7 +36,7 @@ void intArray::print() const {
     }
     for (int i = 0; i < size; ++i) {
         if (i+1 < size) std::cout << array[i] << " ";
-        std::cout << array[i] << std::endl;
+        else std::cout << array[i] << std::endl;
     }
 }
 
@@ -52,10 +52,10 @@ void intArray::set(int index, int value) {
     array[index] = value;
 }
 
-int intArray::get(int index) {
+int intArray::get(int index) const{
     if (index < 0 || index >= size) {
         std::cout << "out of array bounds" << std::endl;
-        throw std::out_of_range;
+        return 0;
     }
 
     return array[index];
@@ -87,10 +87,10 @@ void intArray::add(const intArray& added) {
 }
 
 void intArray::sub(const intArray& subtracted) {
-        if (added.size < size) {
-        for (int i = 0; i < added.size; ++i) array[i] -= added.array[i];
+        if (subtracted.size < size) {
+        for (int i = 0; i < subtracted.size; ++i) array[i] -= subtracted.array[i];
         return;
     }
-    for (int i = 0; i < size; ++i) array[i] -= added.array[i];
+    for (int i = 0; i < size; ++i) array[i] -= subtracted.array[i];
 }
 
