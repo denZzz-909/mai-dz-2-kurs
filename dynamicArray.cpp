@@ -3,9 +3,11 @@
 
 intArray::intArray(int size) {
     if (size <= 0) {
-        this->size = 0;
-        this->array = nullptr;
-        return;
+        throw std::out_of_range("size could not be less than a zero");
+
+        // this->size = 0;    //здесь exception
+        // this->array = nullptr;
+        // return;
     }
 
     this->size = size;
@@ -31,8 +33,8 @@ intArray::intArray(const intArray& copied /*копируемый объект ч
 
 void intArray::print() const {
     if (size == 0) {
-        std::cout << "array is empty" << std::endl;
-        return;
+        std::cout << "array is empty" << std::endl;    // здесь exception //не нужон, тк есть в конструкторе
+        return;                                        // вообще вроде не нужны эти строчки
     }
     for (int i = 0; i < size; ++i) {
         if (i+1 < size) std::cout << array[i] << " ";
@@ -42,20 +44,23 @@ void intArray::print() const {
 
 void intArray::set(int index, int value) {
     if (index < 0 || index >= size) {
-        std::cout << "out of array bounds" << std::endl;
-        return;
+        throw std::out_of_range("out of array bounds");
+        // std::cout << "out of array bounds" << std::endl;    //здесь exception
+        // return;
     }
     if (value < -100 || value > 100) {
-        std::cout << "value exceeds the limits (-100 <= value <= 100)" << std::endl;
-        return;
+        throw std::invalid_argument("value exceeds the limits (-100 <= value <= 100)");
+        // std::cout << "value exceeds the limits (-100 <= value <= 100)" << std::endl;    //здесь exception
+        // return;
     }
     array[index] = value;
 }
 
 int intArray::get(int index) const{
     if (index < 0 || index >= size) {
-        std::cout << "out of array bounds" << std::endl;
-        return 0;
+        throw std::out_of_range("out of array bounds");
+        // std::cout << "out of array bounds" << std::endl;    //здесь exception
+        // return 0;
     }
 
     return array[index];
@@ -63,8 +68,9 @@ int intArray::get(int index) const{
 
 void intArray::append(int value) { // добавление в конец
     if (value < -100 || value > 100) {
-        std::cout << "value exceeds the limits (-100 <= value <= 100)" << std::endl;
-        return;
+        throw std::invalid_argument("value exceeds the limits (-100 <= value <= 100)");
+        // std::cout << "value exceeds the limits (-100 <= value <= 100)" << std::endl;    //здесь exception
+        // return;
     }
     
     int newSize = size + 1;
@@ -87,7 +93,7 @@ void intArray::add(const intArray& added) {
 }
 
 void intArray::sub(const intArray& subtracted) {
-        if (subtracted.size < size) {
+    if (subtracted.size < size) {
         for (int i = 0; i < subtracted.size; ++i) array[i] -= subtracted.array[i];
         return;
     }
