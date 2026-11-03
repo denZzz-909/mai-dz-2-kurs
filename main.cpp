@@ -39,26 +39,26 @@ int main() {
     arr_n.print();
 
 
-    try { // setter
-        std::cout << "setter with an out of range index: ";
-        arr.set(12, 34);
-    } catch (const std::out_of_range& err) {std::cout << "out_of_range: " << err.what() << std::endl;}
-    try {
-        std::cout << "setter with an invalid value: ";
-        arr.set(0, 101);
-    } catch (const std::invalid_argument& err) {std::cout << "exceeding_value: " << err.what() << std::endl;}
-    try { // getter
-        std::cout << "getter with an out of range index: ";
-        arr.get(50);
-    } catch (const std::out_of_range& err) {std::cout << "out_of_range: " << err.what() << std::endl;}
-    try { // constructor
-        std::cout << "invalid range constructor: ";
-        intArray arr_test(-1000);
-    } catch (const std::out_of_range& err) {std::cout << "out_of_range: " << err.what() << std::endl;}
-    try { // append
-        std::cout << "invalid value append: ";
-        arr.append(10000);
-    } catch (const std::invalid_argument& err) {std::cout << "exceeding_value: " << err.what() << std::endl;}
+    // try { // setter
+    //     std::cout << "setter with an out of range index: ";
+    //     arr.set(12, 34);
+    // } catch (const std::out_of_range& err) {std::cout << "out_of_range: " << err.what() << std::endl;}
+    // try {
+    //     std::cout << "setter with an invalid value: ";
+    //     arr.set(0, 101);
+    // } catch (const std::invalid_argument& err) {std::cout << "exceeding_value: " << err.what() << std::endl;}
+    // try { // getter
+    //     std::cout << "getter with an out of range index: ";
+    //     arr.get(50);
+    // } catch (const std::out_of_range& err) {std::cout << "out_of_range: " << err.what() << std::endl;}
+    // try { // constructor
+    //     std::cout << "invalid range constructor: ";
+    //     intArray arr_test(-1000);
+    // } catch (const std::out_of_range& err) {std::cout << "out_of_range: " << err.what() << std::endl;}
+    // try { // append
+    //     std::cout << "invalid value append: ";
+    //     arr.append(10000);
+    // } catch (const std::invalid_argument& err) {std::cout << "exceeding_value: " << err.what() << std::endl;}
 
     return 0;
 }
