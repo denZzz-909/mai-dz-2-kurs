@@ -22,7 +22,7 @@ class Array {
             array = nullptr;
         }
 
-        Array(const intArray& copied) { // задание 2: конструктор копирования
+        Array(const Array& copied) { // задание 2: конструктор копирования
             this->size = copied.size;
             if (copied.size == 0 || copied.array == nullptr) {
                 this->array = nullptr;
@@ -98,21 +98,30 @@ class Array {
             } else throw std::bad_typeid("not an integer");
         }
 
-        friend std::ostream& operator<<(std::ostream& out, const Array& array) { // 3 часть, задание 2 
-            for (int i = 0; i < size; ++i) {
-                if (i+1 < size) out << array[i] << " ";
+        // перегрузка оператора [] для вывода в терминал
+        T& operator[](int index) {
+            return array[index];
+        }
+
+        const T& operator[](int index) const {
+            return array[index];
+        }
+
+        friend std::ostream& operator<<(std::ostream& out, const Array& array) { // 3 часть, задание 2 (вывод в терминал)
+            for (int i = 0; i < array.size; ++i) {
+                if (i+1 < array.size) out << array[i] << " ";
                 else out << array[i] << std::endl;
             }
             return out;
         }
 
-        float dist(Array& a, Array& b) const { //3 часть, задание 3
+        float dist(Array& other) const { //3 часть, задание 3
             if constexpr (!std::is_same_v<T, int>) throw std::bad_typeid("not an integer");
-            if (a.size != b.size) throw std::invalid_argument("different sizes");
+            if (this->size != other.size) throw std::invalid_argument("different sizes");
             float distance = 0;
-            for (int i = 0; i < a.size; ++i)
-                distance += (a[i] - b[i])*(a[i] - b[i]);
-            distance = std.sqrt(distance);
+            for (int i = 0; i < other.size; ++i)
+                distance += (this->array[i] - other[i])*(this->array[i] - other[i]);
+            distance = std::sqrt(distance);
             return distance;
         }
 };
